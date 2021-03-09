@@ -17,9 +17,9 @@
 boardFormat=""
 a1=a2=a3=b1=b2=b3=c1=c2=c3=" "
 LastSet=True
-board="\n"+a1+"|"+a2+"|"+a3+"\n"+b1+"|"+b2+"|"+b3+"e\n"+c1+"|"+c2+"|"+c3
 
 def refresh():
+    board="\n "+a1+"|"+a2+"|"+a3+"\n "+b1+"|"+b2+"|"+b3+"\ne "+c1+"|"+c2+"|"+c3
     global LastSet,boardFormat
     for i in board:
         if i=="e":LastSet=False
@@ -27,9 +27,10 @@ def refresh():
         elif LastSet==False:boardFormat+=i
     print(boardFormat)
 
-refresh()
 print("How To Play:\nSpots on the board are named A1-C3, with A being the top row and C being the bottom.")
 
-#SelectedSpace=input("Please choose an area to claim\f").lower()
+SelectedSpace=input("Please choose an area to claim\f").lower()
 
-#exec(SelectedSpace+'="X"')
+exec(SelectedSpace+'="X"')
+
+refresh()

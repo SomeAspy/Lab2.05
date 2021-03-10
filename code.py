@@ -43,6 +43,8 @@ def refill():
     fill()
 
 wtf=exec(SelectedSpace+'="X"')
-refill()
-wtf=exec(SelectedSpace+'="X"')
-refill()
+refresh()
+
+
+################ BOT?
+

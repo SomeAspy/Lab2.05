@@ -4,8 +4,6 @@
 #
 #   info:
 #   underline in unicode \u0332
-#   THIS USES EXEC AND IS THEREFORE BAD PRACTICE!!
-#   convert to dictionary when I'm actually good maybe...
 #   Apparently you can't use exec() inside a function, so like, wtf?
 #
 #   BOARD
@@ -24,30 +22,11 @@ def refresh(LastSet=True,BoardFormat=""):
         elif LastSet:BoardFormat+=i+"\u0332"
         elif LastSet==False:BoardFormat+=i
     print(BoardFormat)
+
 print("How To Play:\nSpots on the board are named A1-C3, with A being the top row and C being the bottom.")
 
-#SelectedSpace=input("Please choose an area to claim\f").lower()
-
-#wtf=exec(SelectedSpace+'="X"') #legit can't even
-#def fill():
-#    if bool(re.match(r"[a-c][1-3]", SelectedSpace)):
-#        if SelectedSpace in claimed:
-#            print("That space is occupied!")
-#        else:
-#            wtf
-#            claimed.append(SelectedSpace)
-#    else:
-#        print("That didn't work...")
-#def refill():
-#    refresh()
-#    global SelectedSpace
-#    SelectedSpace=input("Please choose an area to claim\f").lower()
-#    fill()
-#
-#wtf=exec(SelectedSpace+'="X"')
-#refresh()
-
 def Place(pos):
+    global a1,a2,a3,b1,b2,b3,c1,c2,c3
     if pos=="a1":
         a1="X"
     elif pos=="a2":
@@ -58,21 +37,38 @@ def Place(pos):
         b1="X"
     elif pos=="b2":
         b2="X"
+    elif pos=="b3":
+        b3="X"
+    elif pos=="c1":
+        c1="X"
+    elif pos=="c2":
+        c2="X"
+    elif pos=="c3":
+        c3="X"
 
-def IsOpen(space,PT=True):
-    global claimed
+def IsOpen(space):
     if space in claimed:
-        if PT:
-            print("That space is occupied!")
-            return False
-        elif not PT:
-            return False
+        return False
     else:
-        return
+        return True
 
 def PTurn():
-    global SelectedSpace
-    SelectedSpace=input("Please choose an area to claim\f").lower()
+    toCheck=input("Please choose an area to claim\f").lower()
+    if bool(re.match(r"[a-c][1-3]", toCheck)):
+        if IsOpen(toCheck):
+            global SelectedSpace
+            SelectedSpace=toCheck
+            Place(SelectedSpace)
+            claimed.append(SelectedSpace)
+            refresh()
+        else:
+            print("That space seems to be occupied! Please input an open space!")
+            PTurn()
+    else:
+        print("That isn't a valid space, please double check your input!")
+        PTurn()
+    
+
 
 def CPlace(Z,CA1,CA2,CA3,CB1,CB2,CB3,CC1,CC2,CC3):
     #I'm not making another wtf variable.
@@ -91,8 +87,11 @@ def CPlace(Z,CA1,CA2,CA3,CB1,CB2,CB3,CC1,CC2,CC3):
     elif Z=="c1":
         return CC1
 
-################ BOT?
-# test code signing because it probably wont work
+PTurn()
+PTurn()
+PTurn()
+PTurn()
+
 #Computer will try to claim these spaces on each turn. if the space is claimed, it will move to the next. 
 #please send help https://xkcd.com/832_large/
 

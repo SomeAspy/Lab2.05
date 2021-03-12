@@ -30,9 +30,9 @@ def Place(pos):
     if pos=="a1":
         a1="X"
     elif pos=="a2":
-        a2=="X"
+        a2="X"
     elif pos=="a3":
-        a3=="X"
+        a3="X"
     elif pos=="b1":
         b1="X"
     elif pos=="b2":

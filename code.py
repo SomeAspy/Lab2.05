@@ -15,7 +15,8 @@ import re
 
 # Blank out variables and define them
 a1=a2=a3=b1=b2=b3=c1=c2=c3=" "
-claimed=[""]
+Pclaimed=[""]
+Cclaimed=[""]
 
 # Build and display the board
 def refresh(LastSet=True,BoardFormat=""):
@@ -55,7 +56,7 @@ def Place(pos):
 
 # Check if the space given is claimed
 def IsOpen(space):
-    if space in claimed:
+    if space in Pclaimed or space in Cclaimed:
         return False
     else:
         return True
@@ -70,7 +71,7 @@ def PTurn():
             SelectedSpace=toCheck
             Place(SelectedSpace)
             # Add the given space to the list of claimed spaces
-            claimed.append(SelectedSpace)
+            Pclaimed.append(SelectedSpace)
             refresh()
         else:
             print("That space seems to be occupied! Please input an open space!")
@@ -79,9 +80,62 @@ def PTurn():
     else:
         print("That isn't a valid space, please double check your input!")
         PTurn()
+
+# horizontal regex a[1-3]
+# vertical regex [a-c]1
+# diag regex c3|b2|a1
+
+def PWinCheck():
+    if "a1"and"b1"and"c1"in Pclaimed:
+        return True
+    elif "a2"and"b2"and"c2"in Pclaimed:
+        return True
+    elif "a3"and"b3"and"c3"in Pclaimed:
+        return True
+    elif "a1"and"a2"and"a3"in Pclaimed:
+        return True
+    elif "b1"and"b2"and"b3"in Pclaimed:
+        return True
+    elif "c1"and"c2"and"c3"in Pclaimed:
+        return True
+    elif "a1"and"b2"and"c3"in Pclaimed:
+        return True
+    elif "a3"and"b2"and"c1"in Pclaimed:
+        return True
+    else:
+        return False
+
+def CWinCheck():
+    if "a1"and"b1"and"c1"in Cclaimed:
+        return True
+    elif "a2"and"b2"and"c2"in Cclaimed:
+        return True
+    elif "a3"and"b3"and"c3"in Cclaimed:
+        return True
+    elif "a1"and"a2"and"a3"in Cclaimed:
+        return True
+    elif "b1"and"b2"and"b3"in Cclaimed:
+        return True
+    elif "c1"and"c2"and"c3"in Cclaimed:
+        return True
+    elif "a1"and"b2"and"c3"in Cclaimed:
+        return True
+    elif "a3"and"b2"and"c1"in Cclaimed:
+        return True
+    else:
+        return False
+
+def WinCheck():
+    if CWinCheck():
+        print("Computer Wins!")
+        quit()
+    elif PWinCheck():
+        print("You Win!")
+        quit()
+    else:
+        pass
+
     
-
-
 def CPlace(Z,CA1,CA2,CA3,CB1,CB2,CB3,CC1,CC2,CC3):
     if Z=="a1":
         return CA1
@@ -98,12 +152,16 @@ def CPlace(Z,CA1,CA2,CA3,CB1,CB2,CB3,CC1,CC2,CC3):
     elif Z=="c1":
         return CC1
 
-print("How To Play:\nSpots on the board are named A1-C3, with A being the top row and C being the bottom.")
+def cycle():
+    PTurn()
+    # CTurn()
+    WinCheck()
+    cycle()
 
-PTurn()
-PTurn()
-PTurn()
-PTurn()
+
+print("How To Play:\nSpots on the board are named A1-C3, with A being the top row and C being the bottom.")
+refresh()
+cycle()
 
 #Computer will try to claim these spaces on each turn. if the space is claimed, it will move to the next. 
 #please send help https://xkcd.com/832_large/

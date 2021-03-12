@@ -4,7 +4,7 @@
 #
 #   info:
 #   underline in unicode \u0332
-#
+
 #   BOARD
 #   A1|A2|A3
 #   B1|B2|B3
@@ -15,8 +15,7 @@ import re
 
 # Blank out variables and define them
 a1=a2=a3=b1=b2=b3=c1=c2=c3=" "
-Pclaimed=[""]
-Cclaimed=[""]
+Cclaimed=Pclaimed=[""]
 
 # Build and display the board
 def refresh(LastSet=True,BoardFormat=""):
@@ -136,21 +135,21 @@ def WinCheck():
         pass
 
 # Computer claiming system. probably will do this later.
-def CPlace(Z,CA1,CA2,CA3,CB1,CB2,CB3,CC1,CC2,CC3):
-    if Z=="a1":
-        return CA1
-    elif Z=="a2":
-        return CA2
-    elif Z=="a3":
-        return CA3
-    elif Z=="b1":
-        return CB1
-    elif Z=="b2":
-        return CB2
-    elif Z=="b3":
-        return CB3
-    elif Z=="c1":
-        return CC1
+# def CPlace(Z,CA1,CA2,CA3,CB1,CB2,CB3,CC1,CC2,CC3):
+#    if Z=="a1":
+#        return CA1
+#    elif Z=="a2":
+#        return CA2
+#    elif Z=="a3":
+#        return CA3
+#    elif Z=="b1":
+#        return CB1
+#    elif Z=="b2":
+#        return CB2
+#    elif Z=="b3":
+#        return CB3
+#    elif Z=="c1":
+#        return CC1
 
 # Loop claiming and check for win.
 def cycle():
@@ -159,12 +158,7 @@ def cycle():
     WinCheck()
     cycle()
 
-
+# Run the game
 print("How To Play:\nSpots on the board are named A1-C3, with A being the top row and C being the bottom.")
 refresh()
 cycle()
-
-#Computer will try to claim these spaces on each turn. if the space is claimed, it will move to the next. 
-#please send help https://xkcd.com/832_large/
-
-#Bot Turn One

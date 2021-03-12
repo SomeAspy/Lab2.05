@@ -81,10 +81,7 @@ def PTurn():
         print("That isn't a valid space, please double check your input!")
         PTurn()
 
-# horizontal regex a[1-3]
-# vertical regex [a-c]1
-# diag regex c3|b2|a1
-
+# Check for player win conditions
 def PWinCheck():
     if "a1"in Pclaimed and"b1"in Pclaimed and"c1"in Pclaimed:
         return True
@@ -105,6 +102,7 @@ def PWinCheck():
     else:
         return False
 
+# Check for Computer win conditions
 def CWinCheck():
     if "a1"in Cclaimed and"b1"in Cclaimed and"c1"in Cclaimed:
         return True
@@ -125,9 +123,11 @@ def CWinCheck():
     else:
         return False
 
+# End the game and display winner
 def WinCheck():
     if CWinCheck():
         print("Computer Wins!")
+        # End the script
         quit()
     elif PWinCheck():
         print("You Win!")
@@ -135,7 +135,7 @@ def WinCheck():
     else:
         pass
 
-    
+# Computer claiming system. probably will do this later.
 def CPlace(Z,CA1,CA2,CA3,CB1,CB2,CB3,CC1,CC2,CC3):
     if Z=="a1":
         return CA1
@@ -152,6 +152,7 @@ def CPlace(Z,CA1,CA2,CA3,CB1,CB2,CB3,CC1,CC2,CC3):
     elif Z=="c1":
         return CC1
 
+# Loop claiming and check for win.
 def cycle():
     PTurn()
     # CTurn()

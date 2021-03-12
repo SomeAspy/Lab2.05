@@ -86,41 +86,41 @@ def PTurn():
 # diag regex c3|b2|a1
 
 def PWinCheck():
-    if "a1"and"b1"and"c1"in Pclaimed:
+    if "a1"in Pclaimed and"b1"in Pclaimed and"c1"in Pclaimed:
         return True
-    elif "a2"and"b2"and"c2"in Pclaimed:
+    elif "a2"in Pclaimed and"b2"in Pclaimed and"c2"in Pclaimed:
         return True
-    elif "a3"and"b3"and"c3"in Pclaimed:
+    elif "a3"in Pclaimed and"b3"in Pclaimed and"c3"in Pclaimed:
         return True
-    elif "a1"and"a2"and"a3"in Pclaimed:
+    elif "a1"in Pclaimed and"a2"in Pclaimed and"a3"in Pclaimed:
         return True
-    elif "b1"and"b2"and"b3"in Pclaimed:
+    elif "b1"in Pclaimed and"b2"in Pclaimed and"b3"in Pclaimed:
         return True
-    elif "c1"and"c2"and"c3"in Pclaimed:
+    elif "c1"in Pclaimed and"c2"in Pclaimed and"c3"in Pclaimed:
         return True
-    elif "a1"and"b2"and"c3"in Pclaimed:
+    elif "a1"in Pclaimed and"b2"in Pclaimed and"c3"in Pclaimed:
         return True
-    elif "a3"and"b2"and"c1"in Pclaimed:
+    elif "a3"in Pclaimed and"b2"in Pclaimed and"c1"in Pclaimed:
         return True
     else:
         return False
 
 def CWinCheck():
-    if "a1"and"b1"and"c1"in Cclaimed:
+    if "a1"in Cclaimed and"b1"in Cclaimed and"c1"in Cclaimed:
         return True
-    elif "a2"and"b2"and"c2"in Cclaimed:
+    elif "a2"in Cclaimed and"b2"in Cclaimed and"c2"in Cclaimed:
         return True
-    elif "a3"and"b3"and"c3"in Cclaimed:
+    elif "a3"in Cclaimed and"b3"in Cclaimed and"c3"in Cclaimed:
         return True
-    elif "a1"and"a2"and"a3"in Cclaimed:
+    elif "a1"in Cclaimed and"a2"in Cclaimed and"a3"in Cclaimed:
         return True
-    elif "b1"and"b2"and"b3"in Cclaimed:
+    elif "b1"in Cclaimed and"b2"in Cclaimed and"b3"in Cclaimed:
         return True
-    elif "c1"and"c2"and"c3"in Cclaimed:
+    elif "c1"in Cclaimed and"c2"in Cclaimed and"c3"in Cclaimed:
         return True
-    elif "a1"and"b2"and"c3"in Cclaimed:
+    elif "a1"in Cclaimed and"b2"in Cclaimed and"c3"in Cclaimed:
         return True
-    elif "a3"and"b2"and"c1"in Cclaimed:
+    elif "a3"in Cclaimed and"b2"in Cclaimed and"c1"in Cclaimed:
         return True
     else:
         return False

@@ -15,7 +15,10 @@ import re
 
 # Blank out variables and define them
 a1=a2=a3=b1=b2=b3=c1=c2=c3=" "
-Cclaimed=Pclaimed=[""]
+
+# apparently you cannot string lists together like above.
+Xclaimed=[""]
+Oclaimed=[""]
 
 # Build and display the board
 def refresh(LastSet=True,BoardFormat=""):
@@ -30,106 +33,109 @@ def refresh(LastSet=True,BoardFormat=""):
             BoardFormat+=i
     print(BoardFormat)
 
-# Change position given to X
-def Place(pos):
+# Change position given to symbol given
+def Place(pos, symbol):
     # Reference variables outside the function
     global a1,a2,a3,b1,b2,b3,c1,c2,c3
     if pos=="a1":
-        a1="X"
+        a1=symbol
     elif pos=="a2":
-        a2="X"
+        a2=symbol
     elif pos=="a3":
-        a3="X"
+        a3=symbol
     elif pos=="b1":
-        b1="X"
+        b1=symbol
     elif pos=="b2":
-        b2="X"
+        b2=symbol
     elif pos=="b3":
-        b3="X"
+        b3=symbol
     elif pos=="c1":
-        c1="X"
+        c1=symbol
     elif pos=="c2":
-        c2="X"
+        c2=symbol
     elif pos=="c3":
-        c3="X"
+        c3=symbol
 
 # Check if the space given is claimed
 def IsOpen(space):
-    if space in Pclaimed or space in Cclaimed:
+    if space in Xclaimed or space in Oclaimed:
         return False
     else:
         return True
 
 # Player's Turn
-def PTurn():
+def PTurn(symbol):
     toCheck=input("Please choose an area to claim\f").lower()
     # check if input matches RegEx
     if bool(re.match(r"[a-c][1-3]", toCheck)):
         if IsOpen(toCheck):
             global SelectedSpace
             SelectedSpace=toCheck
-            Place(SelectedSpace)
-            # Add the given space to the list of claimed spaces
-            Pclaimed.append(SelectedSpace)
+            Place(SelectedSpace, symbol)
+            # Add the given space to the list of claimed spaces depending on which symbol it is
+            if symbol=="X":
+                Xclaimed.append(SelectedSpace)
+            elif symbol=="O":
+                Oclaimed.append(SelectedSpace)
             refresh()
         else:
             print("That space seems to be occupied! Please input an open space!")
             # Retry
-            PTurn()
+            PTurn(symbol)
     else:
         print("That isn't a valid space, please double check your input!")
-        PTurn()
+        PTurn(symbol)
 
 # Check for player win conditions
-def PWinCheck():
-    if "a1"in Pclaimed and"b1"in Pclaimed and"c1"in Pclaimed:
+def XWinCheck():
+    if "a1"in Xclaimed and"b1"in Xclaimed and"c1"in Xclaimed:
         return True
-    elif "a2"in Pclaimed and"b2"in Pclaimed and"c2"in Pclaimed:
+    elif "a2"in Xclaimed and"b2"in Xclaimed and"c2"in Xclaimed:
         return True
-    elif "a3"in Pclaimed and"b3"in Pclaimed and"c3"in Pclaimed:
+    elif "a3"in Xclaimed and"b3"in Xclaimed and"c3"in Xclaimed:
         return True
-    elif "a1"in Pclaimed and"a2"in Pclaimed and"a3"in Pclaimed:
+    elif "a1"in Xclaimed and"a2"in Xclaimed and"a3"in Xclaimed:
         return True
-    elif "b1"in Pclaimed and"b2"in Pclaimed and"b3"in Pclaimed:
+    elif "b1"in Xclaimed and"b2"in Xclaimed and"b3"in Xclaimed:
         return True
-    elif "c1"in Pclaimed and"c2"in Pclaimed and"c3"in Pclaimed:
+    elif "c1"in Xclaimed and"c2"in Xclaimed and"c3"in Xclaimed:
         return True
-    elif "a1"in Pclaimed and"b2"in Pclaimed and"c3"in Pclaimed:
+    elif "a1"in Xclaimed and"b2"in Xclaimed and"c3"in Xclaimed:
         return True
-    elif "a3"in Pclaimed and"b2"in Pclaimed and"c1"in Pclaimed:
+    elif "a3"in Xclaimed and"b2"in Xclaimed and"c1"in Xclaimed:
         return True
     else:
         return False
 
 # Check for Computer win conditions
-def CWinCheck():
-    if "a1"in Cclaimed and"b1"in Cclaimed and"c1"in Cclaimed:
+def OWinCheck():
+    if "a1"in Oclaimed and"b1"in Oclaimed and"c1"in Oclaimed:
         return True
-    elif "a2"in Cclaimed and"b2"in Cclaimed and"c2"in Cclaimed:
+    elif "a2"in Oclaimed and"b2"in Oclaimed and"c2"in Oclaimed:
         return True
-    elif "a3"in Cclaimed and"b3"in Cclaimed and"c3"in Cclaimed:
+    elif "a3"in Oclaimed and"b3"in Oclaimed and"c3"in Oclaimed:
         return True
-    elif "a1"in Cclaimed and"a2"in Cclaimed and"a3"in Cclaimed:
+    elif "a1"in Oclaimed and"a2"in Oclaimed and"a3"in Oclaimed:
         return True
-    elif "b1"in Cclaimed and"b2"in Cclaimed and"b3"in Cclaimed:
+    elif "b1"in Oclaimed and"b2"in Oclaimed and"b3"in Oclaimed:
         return True
-    elif "c1"in Cclaimed and"c2"in Cclaimed and"c3"in Cclaimed:
+    elif "c1"in Oclaimed and"c2"in Oclaimed and"c3"in Oclaimed:
         return True
-    elif "a1"in Cclaimed and"b2"in Cclaimed and"c3"in Cclaimed:
+    elif "a1"in Oclaimed and"b2"in Oclaimed and"c3"in Oclaimed:
         return True
-    elif "a3"in Cclaimed and"b2"in Cclaimed and"c1"in Cclaimed:
+    elif "a3"in Oclaimed and"b2"in Oclaimed and"c1"in Oclaimed:
         return True
     else:
         return False
 
 # End the game and display winner
 def WinCheck():
-    if CWinCheck():
-        print("Computer Wins!")
+    if OWinCheck():
+        print("O Wins!")
         # End the script
         quit()
-    elif PWinCheck():
-        print("You Win!")
+    elif XWinCheck():
+        print("X Wins!")
         quit()
     else:
         pass
@@ -153,7 +159,9 @@ def WinCheck():
 
 # Loop claiming and check for win.
 def cycle():
-    PTurn()
+    PTurn("X")
+    WinCheck()
+    PTurn("O")
     # CTurn()
     WinCheck()
     cycle()

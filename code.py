@@ -21,7 +21,7 @@ Xclaimed=[""]
 Oclaimed=[""]
 
 # Build and display the board
-def refresh(LastSet=True,BoardFormat=""):
+def PrntBoard(LastSet=True,BoardFormat=""):
     board="\n "+a1+"|"+a2+"|"+a3+"\n "+b1+"|"+b2+"|"+b3+"\ne "+c1+"|"+c2+"|"+c3
     # Add underline to all characters until we hit "e"
     for i in board:
@@ -77,7 +77,7 @@ def PTurn(symbol):
                 Xclaimed.append(SelectedSpace)
             elif symbol=="O":
                 Oclaimed.append(SelectedSpace)
-            refresh()
+            PrntBoard()
         else:
             print("That space seems to be occupied! Please input an open space!")
             # Retry
@@ -140,33 +140,16 @@ def WinCheck():
     else:
         pass
 
-# Computer claiming system. probably will do this later.
-# def CPlace(Z,CA1,CA2,CA3,CB1,CB2,CB3,CC1,CC2,CC3):
-#    if Z=="a1":
-#        return CA1
-#    elif Z=="a2":
-#        return CA2
-#    elif Z=="a3":
-#        return CA3
-#    elif Z=="b1":
-#        return CB1
-#    elif Z=="b2":
-#        return CB2
-#    elif Z=="b3":
-#        return CB3
-#    elif Z=="c1":
-#        return CC1
-
 # Loop claiming and check for win.
-def cycle():
+def GameLoop():
     PTurn("X")
     WinCheck()
     PTurn("O")
     # CTurn()
     WinCheck()
-    cycle()
+    GameLoop()
 
 # Run the game
 print("How To Play:\nSpots on the board are named A1-C3, with A being the top row and C being the bottom.")
-refresh()
-cycle()
+PrntBoard()
+GameLoop()
